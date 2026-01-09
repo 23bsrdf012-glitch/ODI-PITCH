@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { brandData } from '../../data/mock';
-import { Download, Loader2 } from 'lucide-react';
+import { Download, Loader2, Printer } from 'lucide-react';
 
 const Navigation = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -16,63 +16,25 @@ const Navigation = () => {
     setIsDownloading(true);
     
     try {
-      // Dynamically import html2pdf
-      const html2pdf = (await import('html2pdf.js')).default;
+      // Use browser's print functionality with PDF-optimized settings
+      // This handles CORS images properly and maintains quality
       
-      // Hide navigation during PDF generation
-      const nav = document.querySelector('nav');
-      const footer = document.querySelector('footer');
-      if (nav) nav.style.display = 'none';
+      // Add a class to body for print styling
+      document.body.classList.add('printing-pdf');
       
-      // Clone the main content to manipulate it
-      const element = document.querySelector('main');
+      // Small delay to apply styles
+      await new Promise(resolve => setTimeout(resolve, 200));
       
-      if (!element) {
-        console.error('Main element not found');
-        setIsDownloading(false);
-        return;
-      }
-
-      // Scroll to top
-      window.scrollTo(0, 0);
+      // Trigger print dialog (user can save as PDF)
+      window.print();
       
-      // Wait for scroll
-      await new Promise(resolve => setTimeout(resolve, 300));
-
-      const opt = {
-        margin: [10, 10, 10, 10],
-        filename: `Karibo_x_Carter_Road_Pitch_${brandData.agencyName}.pdf`,
-        image: { type: 'jpeg', quality: 0.92 },
-        html2canvas: { 
-          scale: 1.5,
-          useCORS: true,
-          allowTaint: true,
-          logging: false,
-          imageTimeout: 15000,
-          removeContainer: true,
-          foreignObjectRendering: false
-        },
-        jsPDF: { 
-          unit: 'mm', 
-          format: 'a4', 
-          orientation: 'landscape',
-          compress: true
-        },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-      };
-
-      await html2pdf().set(opt).from(element).save();
-      
-      // Restore navigation
-      if (nav) nav.style.display = '';
+      // Remove print class after dialog
+      setTimeout(() => {
+        document.body.classList.remove('printing-pdf');
+      }, 1000);
       
     } catch (error) {
-      console.error('Error generating PDF:', error);
-      // Fallback: use browser print
-      window.print();
-      // Restore navigation on error
-      const nav = document.querySelector('nav');
-      if (nav) nav.style.display = '';
+      console.error('Error:', error);
     } finally {
       setIsDownloading(false);
     }
@@ -129,12 +91,12 @@ const Navigation = () => {
           {isDownloading ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span className="hidden sm:inline">Generating...</span>
+              <span className="hidden sm:inline">Preparing...</span>
             </>
           ) : (
             <>
-              <Download className="w-4 h-4" />
-              <span className="hidden sm:inline">Download PDF</span>
+              <Printer className="w-4 h-4" />
+              <span className="hidden sm:inline">Save as PDF</span>
             </>
           )}
         </button>
