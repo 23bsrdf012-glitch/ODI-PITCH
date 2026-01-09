@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { brandData } from '../../data/mock';
-import { Download, Loader2 } from 'lucide-react';
-import { generatePitchDeckPDF } from './PitchDeckPDF';
 
 const Navigation = () => {
-  const [isDownloading, setIsDownloading] = useState(false);
-
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -13,21 +9,8 @@ const Navigation = () => {
     }
   };
 
-  const handleDownloadPDF = async () => {
-    setIsDownloading(true);
-    
-    try {
-      await generatePitchDeckPDF();
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      alert('Error generating PDF. Please try again.');
-    } finally {
-      setIsDownloading(false);
-    }
-  };
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fffef2]/95 backdrop-blur-sm border-b border-[#bcbbb4] print:hidden">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fffef2]/95 backdrop-blur-sm border-b border-[#bcbbb4]">
       <div className="max-w-[1400px] mx-auto px-10 py-5 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img 
@@ -69,23 +52,9 @@ const Navigation = () => {
           </button>
         </div>
 
-        <button 
-          onClick={handleDownloadPDF}
-          disabled={isDownloading}
-          className="flex items-center gap-2 px-5 py-2.5 bg-[#8b3a4c] text-white text-sm font-medium tracking-wider uppercase hover:bg-[#6d2d3b] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
-        >
-          {isDownloading ? (
-            <>
-              <Loader2 className="w-4 h-4 animate-spin" />
-              <span className="hidden sm:inline">Generating...</span>
-            </>
-          ) : (
-            <>
-              <Download className="w-4 h-4" />
-              <span className="hidden sm:inline">Download PDF</span>
-            </>
-          )}
-        </button>
+        <div className="text-xs text-[#666666] tracking-wider uppercase hidden lg:block">
+          Pitch Deck
+        </div>
       </div>
     </nav>
   );
