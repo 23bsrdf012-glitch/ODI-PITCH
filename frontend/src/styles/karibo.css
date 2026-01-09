@@ -146,8 +146,16 @@ img[loading="lazy"].loaded {
 /* Print Styles */
 @media print {
   @page {
-    size: landscape;
-    margin: 10mm;
+    size: A4 landscape;
+    margin: 0;
+  }
+  
+  html, body {
+    width: 100%;
+    height: auto;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
   
   nav,
@@ -156,19 +164,39 @@ img[loading="lazy"].loaded {
     display: none !important;
   }
   
+  main {
+    padding-top: 0 !important;
+  }
+  
   section {
     page-break-inside: avoid;
     break-inside: avoid;
+    page-break-after: always;
   }
   
-  body {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    color-adjust: exact !important;
+  section:last-child {
+    page-break-after: auto;
   }
   
   * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+  }
+  
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+  
+  .bg-\\[\\#333333\\] {
+    background-color: #333333 !important;
+  }
+  
+  .bg-\\[\\#8b3a4c\\] {
+    background-color: #8b3a4c !important;
+  }
+  
+  .text-white {
+    color: white !important;
   }
 }
