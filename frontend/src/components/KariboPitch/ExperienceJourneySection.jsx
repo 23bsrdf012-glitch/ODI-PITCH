@@ -47,13 +47,24 @@ const ExperienceJourneySection = () => {
             >
               {/* Image */}
               <div className={`relative ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
+                {item.useLogo ? (
+                  // Special styling for Discovery section with logo
+                  <div className="aspect-[4/3] bg-[#8b3a4c] flex items-center justify-center overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="w-2/3 h-auto object-contain"
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                )}
                 <div className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-[#8b3a4c] text-white text-lg font-light">
                   {String(item.id).padStart(2, '0')}
                 </div>
