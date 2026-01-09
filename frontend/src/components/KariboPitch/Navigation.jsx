@@ -17,38 +17,64 @@ const Navigation = () => {
     setIsDownloading(true);
     
     try {
+      // Hide navigation during PDF generation
+      const nav = document.querySelector('nav');
+      if (nav) nav.style.display = 'none';
+      
       // Get the main content element
       const element = document.querySelector('main');
       
+      if (!element) {
+        console.error('Main element not found');
+        setIsDownloading(false);
+        return;
+      }
+
       const opt = {
-        margin: 0,
+        margin: [5, 5, 5, 5],
         filename: `Karibo_x_Carter_Road_Pitch_${brandData.agencyName}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
+        image: { type: 'jpeg', quality: 0.95 },
         html2canvas: { 
           scale: 2,
           useCORS: true,
           allowTaint: true,
-          scrollY: 0,
-          windowHeight: document.body.scrollHeight
+          logging: false,
+          letterRendering: true,
+          scrollX: 0,
+          scrollY: -window.scrollY
         },
         jsPDF: { 
           unit: 'mm', 
           format: 'a4', 
-          orientation: 'portrait' 
+          orientation: 'landscape',
+          compress: true
         },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        pagebreak: { mode: ['css', 'legacy'], before: '.page-break' }
       };
 
+      // Scroll to top before generating
+      window.scrollTo(0, 0);
+      
+      // Wait a moment for scroll and images to settle
+      await new Promise(resolve => setTimeout(resolve, 500));
+
       await html2pdf().set(opt).from(element).save();
+      
+      // Restore navigation
+      if (nav) nav.style.display = '';
+      
     } catch (error) {
       console.error('Error generating PDF:', error);
+      // Restore navigation on error
+      const nav = document.querySelector('nav');
+      if (nav) nav.style.display = '';
     } finally {
       setIsDownloading(false);
     }
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fffef2]/95 backdrop-blur-sm border-b border-[#bcbbb4]">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fffef2]/95 backdrop-blur-sm border-b border-[#bcbbb4] print:hidden">
       <div className="max-w-[1400px] mx-auto px-10 py-5 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <img 
