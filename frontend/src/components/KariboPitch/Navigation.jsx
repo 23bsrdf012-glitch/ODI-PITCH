@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { brandData } from '../../data/mock';
-import { Download, Loader2, Printer } from 'lucide-react';
+import { Download, Loader2 } from 'lucide-react';
+import { generatePitchDeckPDF } from './PitchDeckPDF';
 
 const Navigation = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -16,25 +17,10 @@ const Navigation = () => {
     setIsDownloading(true);
     
     try {
-      // Use browser's print functionality with PDF-optimized settings
-      // This handles CORS images properly and maintains quality
-      
-      // Add a class to body for print styling
-      document.body.classList.add('printing-pdf');
-      
-      // Small delay to apply styles
-      await new Promise(resolve => setTimeout(resolve, 200));
-      
-      // Trigger print dialog (user can save as PDF)
-      window.print();
-      
-      // Remove print class after dialog
-      setTimeout(() => {
-        document.body.classList.remove('printing-pdf');
-      }, 1000);
-      
+      await generatePitchDeckPDF();
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
     } finally {
       setIsDownloading(false);
     }
@@ -91,12 +77,12 @@ const Navigation = () => {
           {isDownloading ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin" />
-              <span className="hidden sm:inline">Preparing...</span>
+              <span className="hidden sm:inline">Generating...</span>
             </>
           ) : (
             <>
-              <Printer className="w-4 h-4" />
-              <span className="hidden sm:inline">Save as PDF</span>
+              <Download className="w-4 h-4" />
+              <span className="hidden sm:inline">Download PDF</span>
             </>
           )}
         </button>
