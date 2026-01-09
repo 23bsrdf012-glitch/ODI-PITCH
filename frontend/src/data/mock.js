@@ -48,13 +48,13 @@ export const experienceJourney = [
     id: 2,
     title: "Photobooth",
     description: "Content creation without asking for it.",
-    image: "https://customer-assets.emergentagent.com/job_karibo-experience/artifacts/42yxql40_sll.png"
+    image: "https://customer-assets.emergentagent.com/job_karibo-experience/artifacts/y0aoso63_MC%20BEAUTY%20__A%20neapolitan%20beauty%20sweet%20feast%20last%20week%20for%20our%20friends%20at%20%40melbournecentral.jpg"
   },
   {
     id: 3,
     title: "Product Interaction",
     description: "Not sampling. Ownership.",
-    image: "https://customer-assets.emergentagent.com/job_karibo-experience/artifacts/y0aoso63_MC%20BEAUTY%20__A%20neapolitan%20beauty%20sweet%20feast%20last%20week%20for%20our%20friends%20at%20%40melbournecentral.jpg"
+    image: "https://images.pexels.com/photos/4736026/pexels-photo-4736026.jpeg"
   },
   {
     id: 4,
