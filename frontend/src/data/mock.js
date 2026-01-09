@@ -33,7 +33,7 @@ export const problemData = {
 export const ideaData = {
   headline: "The Karibo Experience Station",
   description: "A premium, walk-in experiential centre designed to integrate seamlessly into Carter Road's natural footfall — inviting discovery instead of demanding attention.",
-  image: "https://images.pexels.com/photos/4858867/pexels-photo-4858867.jpeg"
+  image: "https://customer-assets.emergentagent.com/job_karibo-experience/artifacts/y0aoso63_MC%20BEAUTY%20__A%20neapolitan%20beauty%20sweet%20feast%20last%20week%20for%20our%20friends%20at%20%40melbournecentral.jpg"
 };
 
 export const experienceJourney = [
