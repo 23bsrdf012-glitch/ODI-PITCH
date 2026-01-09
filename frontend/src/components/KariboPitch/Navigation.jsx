@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { brandData } from '../../data/mock';
 import { Download, Loader2 } from 'lucide-react';
-import html2pdf from 'html2pdf.js';
 
 const Navigation = () => {
   const [isDownloading, setIsDownloading] = useState(false);
@@ -17,11 +16,15 @@ const Navigation = () => {
     setIsDownloading(true);
     
     try {
+      // Dynamically import html2pdf
+      const html2pdf = (await import('html2pdf.js')).default;
+      
       // Hide navigation during PDF generation
       const nav = document.querySelector('nav');
+      const footer = document.querySelector('footer');
       if (nav) nav.style.display = 'none';
       
-      // Get the main content element
+      // Clone the main content to manipulate it
       const element = document.querySelector('main');
       
       if (!element) {
@@ -30,18 +33,24 @@ const Navigation = () => {
         return;
       }
 
+      // Scroll to top
+      window.scrollTo(0, 0);
+      
+      // Wait for scroll
+      await new Promise(resolve => setTimeout(resolve, 300));
+
       const opt = {
-        margin: [5, 5, 5, 5],
+        margin: [10, 10, 10, 10],
         filename: `Karibo_x_Carter_Road_Pitch_${brandData.agencyName}.pdf`,
-        image: { type: 'jpeg', quality: 0.95 },
+        image: { type: 'jpeg', quality: 0.92 },
         html2canvas: { 
-          scale: 2,
+          scale: 1.5,
           useCORS: true,
           allowTaint: true,
           logging: false,
-          letterRendering: true,
-          scrollX: 0,
-          scrollY: -window.scrollY
+          imageTimeout: 15000,
+          removeContainer: true,
+          foreignObjectRendering: false
         },
         jsPDF: { 
           unit: 'mm', 
@@ -49,14 +58,8 @@ const Navigation = () => {
           orientation: 'landscape',
           compress: true
         },
-        pagebreak: { mode: ['css', 'legacy'], before: '.page-break' }
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
       };
-
-      // Scroll to top before generating
-      window.scrollTo(0, 0);
-      
-      // Wait a moment for scroll and images to settle
-      await new Promise(resolve => setTimeout(resolve, 500));
 
       await html2pdf().set(opt).from(element).save();
       
@@ -65,6 +68,8 @@ const Navigation = () => {
       
     } catch (error) {
       console.error('Error generating PDF:', error);
+      // Fallback: use browser print
+      window.print();
       // Restore navigation on error
       const nav = document.querySelector('nav');
       if (nav) nav.style.display = '';
