@@ -33,9 +33,6 @@ const ClosingSection = () => {
           <button className="px-10 py-4 bg-transparent border border-white text-white text-sm font-medium tracking-wider uppercase hover:bg-white hover:text-[#333333] transition-all duration-300">
             Let's Talk
           </button>
-          <button className="px-10 py-4 bg-white/10 backdrop-blur-sm text-white text-sm font-medium tracking-wider uppercase hover:bg-white/20 transition-all duration-300">
-            Download Proposal
-          </button>
         </div>
       </div>
     </section>
