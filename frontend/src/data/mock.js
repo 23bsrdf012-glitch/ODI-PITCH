@@ -16,7 +16,7 @@ export const heroData = {
   headline: "KARIBO × CARTER ROAD",
   subheadline: "An Experiential Brand Moment",
   description: "A three-day walk-in brand experience designed to be felt, shared, and remembered.",
-  image: "https://images.pexels.com/photos/35481874/pexels-photo-35481874.jpeg"
+  image: "https://images.unsplash.com/photo-1706216104424-4cc6e96195bc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwxfHxtdW1iYWklMjBtYXJpbmUlMjBkcml2ZSUyMHN1bnNldHxlbnwwfHx8fDE3Njc5NDM4Mjl8MA&ixlib=rb-4.1.0&q=85"
 };
 
 export const problemData = {
