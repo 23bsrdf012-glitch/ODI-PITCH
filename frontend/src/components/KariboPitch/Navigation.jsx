@@ -1,11 +1,49 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { brandData } from '../../data/mock';
+import { Download, Loader2 } from 'lucide-react';
+import html2pdf from 'html2pdf.js';
 
 const Navigation = () => {
+  const [isDownloading, setIsDownloading] = useState(false);
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleDownloadPDF = async () => {
+    setIsDownloading(true);
+    
+    try {
+      // Get the main content element
+      const element = document.querySelector('main');
+      
+      const opt = {
+        margin: 0,
+        filename: `Karibo_x_Carter_Road_Pitch_${brandData.agencyName}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          scrollY: 0,
+          windowHeight: document.body.scrollHeight
+        },
+        jsPDF: { 
+          unit: 'mm', 
+          format: 'a4', 
+          orientation: 'portrait' 
+        },
+        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+      };
+
+      await html2pdf().set(opt).from(element).save();
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    } finally {
+      setIsDownloading(false);
     }
   };
 
@@ -52,9 +90,23 @@ const Navigation = () => {
           </button>
         </div>
 
-        <div className="text-xs text-[#666666] tracking-wider uppercase hidden lg:block">
-          Pitch Deck
-        </div>
+        <button 
+          onClick={handleDownloadPDF}
+          disabled={isDownloading}
+          className="flex items-center gap-2 px-5 py-2.5 bg-[#8b3a4c] text-white text-sm font-medium tracking-wider uppercase hover:bg-[#6d2d3b] transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+        >
+          {isDownloading ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              <span className="hidden sm:inline">Generating...</span>
+            </>
+          ) : (
+            <>
+              <Download className="w-4 h-4" />
+              <span className="hidden sm:inline">Download PDF</span>
+            </>
+          )}
+        </button>
       </div>
     </nav>
   );
