@@ -12,14 +12,15 @@ const HeroSection = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
+      {/* Background Image with Pink Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
           src={heroData.image} 
           alt="Carter Road Activation" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#333333]/40 via-[#333333]/30 to-[#333333]/60"></div>
+        <div className="absolute inset-0 bg-[#8b3a4c]/40 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#8b3a4c]/20 via-transparent to-[#333333]/70"></div>
       </div>
 
       {/* Content */}
