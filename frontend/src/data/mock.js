@@ -41,25 +41,26 @@ export const experienceJourney = [
     id: 1,
     title: "Discovery",
     description: "Design pulls people in. Not promoters.",
-    image: "https://images.pexels.com/photos/35128033/pexels-photo-35128033.jpeg"
+    image: "https://customer-assets.emergentagent.com/job_karibo-experience/artifacts/n9dmedug_kkkk.png",
+    useLogo: true
   },
   {
     id: 2,
     title: "Photobooth",
     description: "Content creation without asking for it.",
-    image: "https://images.pexels.com/photos/35128028/pexels-photo-35128028.jpeg"
+    image: "https://customer-assets.emergentagent.com/job_karibo-experience/artifacts/42yxql40_sll.png"
   },
   {
     id: 3,
     title: "Product Interaction",
     description: "Not sampling. Ownership.",
-    image: "https://images.pexels.com/photos/4736026/pexels-photo-4736026.jpeg"
+    image: "https://customer-assets.emergentagent.com/job_karibo-experience/artifacts/y0aoso63_MC%20BEAUTY%20__A%20neapolitan%20beauty%20sweet%20feast%20last%20week%20for%20our%20friends%20at%20%40melbournecentral.jpg"
   },
   {
     id: 4,
     title: "Community Wall",
     description: "A living brand moment that grows through the day.",
-    image: "https://images.pexels.com/photos/8187485/pexels-photo-8187485.jpeg"
+    image: "https://customer-assets.emergentagent.com/job_karibo-experience/artifacts/rc8l6z0b_download.jpg"
   }
 ];
 
