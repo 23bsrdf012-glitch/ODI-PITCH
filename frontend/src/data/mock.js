@@ -91,11 +91,26 @@ export const agencyData = {
   headline: "We Don't Execute Activations.",
   headlineAccent: "We Design Brand Experiences.",
   services: [
-    "Strategy",
-    "Experience Design",
-    "Production",
-    "On-ground Execution",
-    "Brand Integrity"
+    {
+      name: "Strategy",
+      description: "We begin with deep brand immersion — understanding your audience, market positioning, and campaign objectives. Our strategic framework ensures every activation element serves a purpose, from location selection to consumer journey mapping."
+    },
+    {
+      name: "Experience Design",
+      description: "Our design team crafts immersive environments that tell your brand story. We focus on sensory touchpoints, visual coherence, and intuitive flow — creating spaces that feel natural to explore and memorable to experience."
+    },
+    {
+      name: "Production",
+      description: "From concept to reality, our production team handles fabrication, logistics, and technical requirements. We manage vendors, timelines, and quality control to ensure flawless execution of every design element."
+    },
+    {
+      name: "On-ground Execution",
+      description: "Our experienced activation team manages day-of operations including setup, staffing coordination, crowd flow management, and real-time troubleshooting. We ensure seamless consumer experiences from start to finish."
+    },
+    {
+      name: "Brand Integrity",
+      description: "Every touchpoint is a brand moment. We maintain rigorous quality standards across all elements — from staff training to collateral design — ensuring your brand is represented with consistency and premium positioning."
+    }
   ],
   description: "End-to-end ownership. Not vendor work — strategic partnership."
 };
