@@ -10,9 +10,9 @@ const Footer = () => {
             <img 
               src={brandData.logoUrl} 
               alt="Karibo" 
-              className="h-8 w-auto object-contain brightness-0 invert opacity-80"
+              className="h-10 w-auto object-contain"
             />
-            <span className="text-xs text-white/50 tracking-wider uppercase">× {brandData.agencyName}</span>
+            <span className="text-sm text-white/70 tracking-wider uppercase">× {brandData.agencyName}</span>
           </div>
 
           <div className="text-center md:text-right">
